@@ -13,30 +13,30 @@ import java.util.List;
 @RequestMapping("/hotels")
 public class HotelController {
     @Autowired
-    private HotelService hotelRepository;
+    private HotelService hotelService;
 
     @PostMapping
     public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel){
-        return ResponseEntity.status(HttpStatus.CREATED).body(hotelRepository.saveHotel(hotel));
+        return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.saveHotel(hotel));
     }
 
     @GetMapping("/{hotel_id}")
     public ResponseEntity<Hotel> getHotel(@PathVariable ("hotel_id") String hotelId){
-        return ResponseEntity.status(HttpStatus.FOUND).body(hotelRepository.getHotel(hotelId));
+        return ResponseEntity.status(HttpStatus.FOUND).body(hotelService.getHotel(hotelId));
     }
 
     @GetMapping
     public ResponseEntity<List<Hotel>> getAllHotels(){
-        return ResponseEntity.status(HttpStatus.OK).body(hotelRepository.getAllHotels());
+        return ResponseEntity.status(HttpStatus.OK).body(hotelService.getAllHotels());
     }
 
     @PutMapping
     public ResponseEntity<Hotel> updateHotel(@RequestBody Hotel hotel){
-        return ResponseEntity.status(HttpStatus.OK).body(hotelRepository.updateHotel(hotel));
+        return ResponseEntity.status(HttpStatus.OK).body(hotelService.updateHotel(hotel));
     }
 
     @DeleteMapping("/{hotelId}")
     public ResponseEntity<Hotel> deleteHotel(@PathVariable String hotelId){
-        return ResponseEntity.status(HttpStatus.OK).body(hotelRepository.deleteHotel(hotelId));
+        return ResponseEntity.status(HttpStatus.OK).body(hotelService.deleteHotel(hotelId));
     }
 }
